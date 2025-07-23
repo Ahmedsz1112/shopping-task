@@ -20,38 +20,41 @@ export default function CartPage() {
             {state.cart.map((item) => (
               <li
                 key={item.id}
-                className="flex justify-between items-center border p-4 rounded-md"
+                className="flex justify-between items-center border border-amber-400 p-4 rounded-md shadow hover:shadow-lg transition-shadow duration-300"
               >
-                <div>
-                  <h2 className="font-semibold">{item.name}</h2>
-                  <p>
-                    ${item.price} × {item.quantity}
-                  </p>
+                <div className="flex items-center space-x-4">
+                  <img src={item.image} alt={item.name} className="w-24" />
+                  <div>
+                    <h2 className="font-semibold">{item.name}</h2>
+                    <p>
+                      ${item.price} × {item.quantity}
+                    </p>
+                  </div>
                 </div>
                 <div className="space-x-2">
                   <button
                     onClick={() =>
                       dispatch({ type: "DECREMENT", payload: item.id })
                     }
+                    className="bg-gray-300 w-5 rounded cursor-pointer hover:bg-gray-200"
                   >
-                    ➖
+                    -
                   </button>
                   <button
                     onClick={() =>
                       dispatch({ type: "INCREMENT", payload: item.id })
                     }
+                    className="bg-gray-300 w-5 rounded cursor-pointer hover:bg-gray-200"
                   >
-                    ➕
-                  </button>
-                  <button
-                    onClick={() =>
-                      dispatch({ type: "REMOVE_ITEM", payload: item.id })
-                    }
-                    className="text-red-500 ml-2"
-                  >
-                    Remove
+                    +
                   </button>
                 </div>
+                <button
+                  onClick={() => dispatch({ type: "REMOVE", payload: item.id })}
+                  className="text-red-500 ml-2 cursor-pointer border border-red-500 p-2 rounded-3xl hover:bg-red-500 hover:text-white transition-colors duration-200"
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
@@ -61,11 +64,11 @@ export default function CartPage() {
           <button
             onClick={() => {
               dispatch({ type: "CLEAR_CART" });
-              toast.success("Purchase successful!");
+              toast.success("successful!");
             }}
-            className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
           >
-            Purchase
+            purchasing
           </button>
         </>
       )}

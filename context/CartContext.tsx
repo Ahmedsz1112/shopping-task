@@ -9,8 +9,8 @@ type CartState = {
 };
 
 type Action =
-  | { type: 'ADD_ITEM'; payload: Product }
-  | { type: 'REMOVE_ITEM'; payload: number }
+  | { type: 'ADD'; payload: Product }
+  | { type: 'REMOVE'; payload: number }
   | { type: 'INCREMENT'; payload: number }
   | { type: 'DECREMENT'; payload: number }
   | { type: 'CLEAR_CART' }
@@ -22,7 +22,7 @@ const initialState: CartState = {
 
 function cartReducer(state: CartState, action: Action): CartState {
   switch (action.type) {
-    case 'ADD_ITEM': {
+    case 'ADD': {
       const exists = state.cart.find(item => item.id === action.payload.id);
       if (exists) {
         return {
@@ -38,7 +38,7 @@ function cartReducer(state: CartState, action: Action): CartState {
         };
       }
     }
-    case 'REMOVE_ITEM':
+    case 'REMOVE':
       return {
         ...state,
         cart: state.cart.filter(item => item.id !== action.payload),
